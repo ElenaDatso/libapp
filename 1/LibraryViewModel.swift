@@ -12,18 +12,18 @@ protocol LibraryViewModelDelegate: AnyObject {
     func didFail(error: Error)
 }
 
-protocol BooksServiceProtocol: AnyObject {
+protocol BooksSearchServiceProtocol: AnyObject {
     func search(query: String) async throws -> [BookModel]
 }
 
 final class LibraryViewModel {
 
-    private let booksService: BooksServiceProtocol
+    private let booksService: BooksSearchServiceProtocol
     private(set) var books: [BookModel] = []
 
     weak var delegate: LibraryViewModelDelegate?
 
-    init(service: BooksServiceProtocol) {
+    init(service: BooksSearchServiceProtocol) {
         self.booksService = service
     }
 

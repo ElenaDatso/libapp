@@ -9,6 +9,7 @@ import UIKit
 
 class BookCollectionViewCell: UICollectionViewCell {
     private var vw: BookView?
+    var onTapDetails: (() -> Void)?
     
     var item: BookModel? {
         didSet {
@@ -28,14 +29,19 @@ class BookCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        onTapDetails = nil
+    }
 }
 
 private extension BookCollectionViewCell {
     func setup() {
         guard vw == nil else {return}
         
-        vw = BookView {
-            print("click")
+        vw = BookView(labelText: "Details") { [weak self] in
+            self?.onTapDetails?()
         }
         self.contentView.addSubview(vw!)
         NSLayoutConstraint.activate([

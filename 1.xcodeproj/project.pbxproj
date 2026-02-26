@@ -21,6 +21,14 @@
 		BE88A3F52F4C192F009E222C /* BasicTestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE88A3F42F4C192F009E222C /* BasicTestsLaunchTests.swift */; };
 		BE9C3A822F4B668E00B645CF /* BooksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C3A812F4B668E00B645CF /* BooksService.swift */; };
 		BE9C3A932F4BFD9F00B645CF /* MockBooksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C3A922F4BFD9F00B645CF /* MockBooksService.swift */; };
+		BEF41A352F4F7BD5005CDBE0 /* BookDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A342F4F7BD5005CDBE0 /* BookDetailsScreen.swift */; };
+		BEF41A392F4F9519005CDBE0 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A382F4F9519005CDBE0 /* DetailsViewController.swift */; };
+		BEF41A3B2F4F9A28005CDBE0 /* LibraryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A3A2F4F9A28005CDBE0 /* LibraryCoordinator.swift */; };
+		BEF41A3F2F50D2D5005CDBE0 /* DetailsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A3E2F50D2D4005CDBE0 /* DetailsContentView.swift */; };
+		BEF41A412F50D2F8005CDBE0 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A402F50D2F8005CDBE0 /* DetailsViewModel.swift */; };
+		BEF41A432F50D634005CDBE0 /* CoreDataBookStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A422F50D634005CDBE0 /* CoreDataBookStore.swift */; };
+		BEF41A462F50DA06005CDBE0 /* PocketLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A442F50DA06005CDBE0 /* PocketLibrary.xcdatamodeld */; };
+		BEF41A482F50DDEA005CDBE0 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A472F50DDEA005CDBE0 /* PersistenceController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +59,14 @@
 		BE88A3F42F4C192F009E222C /* BasicTestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTestsLaunchTests.swift; sourceTree = "<group>"; };
 		BE9C3A812F4B668E00B645CF /* BooksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksService.swift; sourceTree = "<group>"; };
 		BE9C3A922F4BFD9F00B645CF /* MockBooksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBooksService.swift; sourceTree = "<group>"; };
+		BEF41A342F4F7BD5005CDBE0 /* BookDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsScreen.swift; sourceTree = "<group>"; };
+		BEF41A382F4F9519005CDBE0 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		BEF41A3A2F4F9A28005CDBE0 /* LibraryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCoordinator.swift; sourceTree = "<group>"; };
+		BEF41A3E2F50D2D4005CDBE0 /* DetailsContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsContentView.swift; sourceTree = "<group>"; };
+		BEF41A402F50D2F8005CDBE0 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
+		BEF41A422F50D634005CDBE0 /* CoreDataBookStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBookStore.swift; sourceTree = "<group>"; };
+		BEF41A452F50DA06005CDBE0 /* PocketLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PocketLibrary.xcdatamodel; sourceTree = "<group>"; };
+		BEF41A472F50DDEA005CDBE0 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +121,13 @@
 				BE7BB3D22F4ABF5B00FE96E0 /* SearchView.swift */,
 				BE9C3A812F4B668E00B645CF /* BooksService.swift */,
 				BE9C3A922F4BFD9F00B645CF /* MockBooksService.swift */,
+				BEF41A382F4F9519005CDBE0 /* DetailsViewController.swift */,
+				BEF41A3A2F4F9A28005CDBE0 /* LibraryCoordinator.swift */,
+				BEF41A3E2F50D2D4005CDBE0 /* DetailsContentView.swift */,
+				BEF41A402F50D2F8005CDBE0 /* DetailsViewModel.swift */,
+				BEF41A422F50D634005CDBE0 /* CoreDataBookStore.swift */,
+				BEF41A442F50DA06005CDBE0 /* PocketLibrary.xcdatamodeld */,
+				BEF41A472F50DDEA005CDBE0 /* PersistenceController.swift */,
 			);
 			path = 1;
 			sourceTree = "<group>";
@@ -114,6 +137,7 @@
 			children = (
 				BE88A3F22F4C192F009E222C /* BasicTests.swift */,
 				BE88A3F42F4C192F009E222C /* BasicTestsLaunchTests.swift */,
+				BEF41A342F4F7BD5005CDBE0 /* BookDetailsScreen.swift */,
 			);
 			path = BasicTests;
 			sourceTree = "<group>";
@@ -218,14 +242,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEF41A3B2F4F9A28005CDBE0 /* LibraryCoordinator.swift in Sources */,
+				BEF41A412F50D2F8005CDBE0 /* DetailsViewModel.swift in Sources */,
 				BE9C3A822F4B668E00B645CF /* BooksService.swift in Sources */,
 				BE7D4F0B2F479D8200B0B958 /* LibraryViewController.swift in Sources */,
 				BE7BB3D12F48E33000FE96E0 /* BookCollectionViewCell.swift in Sources */,
+				BEF41A392F4F9519005CDBE0 /* DetailsViewController.swift in Sources */,
 				BE7BB3CD2F48C6A600FE96E0 /* LibraryResponseModel.swift in Sources */,
 				BE7D4F1B2F47BCB400B0B958 /* BookView.swift in Sources */,
 				BE7BB3D32F4ABF5B00FE96E0 /* SearchView.swift in Sources */,
+				BEF41A3F2F50D2D5005CDBE0 /* DetailsContentView.swift in Sources */,
+				BEF41A482F50DDEA005CDBE0 /* PersistenceController.swift in Sources */,
 				BE9C3A932F4BFD9F00B645CF /* MockBooksService.swift in Sources */,
 				BE7D4F072F479D8200B0B958 /* AppDelegate.swift in Sources */,
+				BEF41A432F50D634005CDBE0 /* CoreDataBookStore.swift in Sources */,
+				BEF41A462F50DA06005CDBE0 /* PocketLibrary.xcdatamodeld in Sources */,
 				BE7BB3CF2F48CB5A00FE96E0 /* LibraryViewModel.swift in Sources */,
 				BE7D4F092F479D8200B0B958 /* SceneDelegate.swift in Sources */,
 			);
@@ -235,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEF41A352F4F7BD5005CDBE0 /* BookDetailsScreen.swift in Sources */,
 				BE88A3F32F4C192F009E222C /* BasicTests.swift in Sources */,
 				BE88A3F52F4C192F009E222C /* BasicTestsLaunchTests.swift in Sources */,
 			);
@@ -491,6 +523,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BEF41A442F50DA06005CDBE0 /* PocketLibrary.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BEF41A452F50DA06005CDBE0 /* PocketLibrary.xcdatamodel */,
+			);
+			currentVersion = BEF41A452F50DA06005CDBE0 /* PocketLibrary.xcdatamodel */;
+			path = PocketLibrary.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BE7D4EFB2F479D8100B0B958 /* Project object */;
 }

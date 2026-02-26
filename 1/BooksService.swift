@@ -12,7 +12,7 @@ enum QueryError: Error {
     case invalidURL
 }
 
-final class BooksService: BooksServiceProtocol {
+final class BooksService: BooksSearchServiceProtocol {
 
     func search(query: String) async throws -> [BookModel] {
         

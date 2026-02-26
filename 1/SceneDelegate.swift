@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var coordinator: LibraryCoordinator?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -20,18 +21,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(windowScene: windowScene)
         
-        let service: BooksServiceProtocol = CommandLine.arguments.contains("-ui-testing")
-        ? MockBooksService()
-        : BooksService()
-        
-        let vc = LibraryViewController(viewModel: LibraryViewModel(service: service))
-        
-        let nav = UINavigationController(rootViewController: vc)
-        
-        self.window?.rootViewController = nav
-        
+        let navController = UINavigationController()
+        let coordinator = LibraryCoordinator(navigationController: navController)
+
+        self.coordinator = coordinator
+        coordinator.start()
+
+        window?.rootViewController = navController
         window?.makeKeyAndVisible()
-    }
+            }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

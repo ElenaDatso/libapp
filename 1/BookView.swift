@@ -8,10 +8,12 @@
 import UIKit
 
 class BookView: UIView {
+    
+    private var labelText: String = ""
 
-    private lazy var detailsBtn: UIButton = {
+    private lazy var actionBtn: UIButton = {
         var config = UIButton.Configuration.filled()
-        config.title = "Details"
+        config.title = self.labelText
         config.baseBackgroundColor = .red
         config.baseForegroundColor = .white
         config.buttonSize = .large
@@ -19,7 +21,7 @@ class BookView: UIView {
         
         let btn = UIButton(configuration: config)
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.addTarget(self, action: #selector(didTapSubscribe), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(didTapDetails), for: .touchUpInside)
         return btn
     }()
     
@@ -37,7 +39,7 @@ class BookView: UIView {
         return lbl
     }()
     
-    private lazy var personStackView: UIStackView = {
+    private lazy var bookStackView: UIStackView = {
         let vw = UIStackView()
         vw.translatesAutoresizingMaskIntoConstraints = false
         vw.axis = .vertical
@@ -45,9 +47,10 @@ class BookView: UIView {
         return vw
     }()
     
-    private var action: () -> ()
+    private var action: (() -> Void)?
     
-    init(action: @escaping () -> ()) {
+    init(labelText: String, action: (() -> Void)? = nil) {
+        self.labelText = labelText
         self.action = action
         super.init(frame: .zero)
         setup()
@@ -63,8 +66,9 @@ class BookView: UIView {
         authorLbl.text = author
     }
     
-    @objc func didTapSubscribe(sender: UIButton) {
-        action()
+    @objc func didTapDetails(sender: UIButton) {
+        print("action")
+        action?()
     }
 }
 
@@ -74,17 +78,17 @@ private extension BookView {
         self.backgroundColor = .gray.withAlphaComponent(0.1)
         self.layer.cornerRadius = 8
         
-        self.addSubview(personStackView)
+        self.addSubview(bookStackView)
         
-        personStackView.addArrangedSubview(titleLbl)
-        personStackView.addArrangedSubview(authorLbl)
-        personStackView.addArrangedSubview(detailsBtn)
+        bookStackView.addArrangedSubview(titleLbl)
+        bookStackView.addArrangedSubview(authorLbl)
+        bookStackView.addArrangedSubview(actionBtn)
         
         NSLayoutConstraint.activate([
-            personStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            personStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
-            personStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            personStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8)
+            bookStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            bookStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
+            bookStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            bookStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8)
         ])
     }
 }

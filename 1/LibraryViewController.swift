@@ -10,6 +10,7 @@ import UIKit
 class LibraryViewController: UIViewController {
     
     private let vm: LibraryViewModel
+    weak var coordinator: LibraryCoordinator?
     private lazy var searchField = SearchView(
         onTap: { [weak self] text in
             guard let self, !text.isEmpty else { return }
@@ -70,6 +71,9 @@ extension LibraryViewController: UICollectionViewDataSource {
         let item = vm.books[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCollectionViewCell", for: indexPath) as! BookCollectionViewCell
         cell.item = item
+        cell.onTapDetails = { [weak self] in
+            self?.coordinator?.showDetails(for: item)
+        }
         cell.accessibilityIdentifier = "bookCell_\(indexPath.item)"
         return cell
     }
