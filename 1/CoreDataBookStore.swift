@@ -62,11 +62,15 @@ final class CoreDataBooksStore: BooksStore {
 
             let results = try self.context.fetch(request)
 
-            return results.map {
-                BookModel(
-                    id: $0.id!,
-                    title: $0.title != nil ? $0.title! : "title not set",
-                    author: $0.author != nil ? $0.author! : "author not set"
+            return results.compactMap { book in
+                guard let id = book.id else {
+                    return nil
+                }
+
+                return BookModel(
+                    id: id,
+                    title: book.title ?? "not set",
+                    author: book.author ?? "not set"
                 )
             }
         }
