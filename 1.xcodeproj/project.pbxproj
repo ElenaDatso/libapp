@@ -29,6 +29,8 @@
 		BEF41A432F50D634005CDBE0 /* CoreDataBookStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A422F50D634005CDBE0 /* CoreDataBookStore.swift */; };
 		BEF41A462F50DA06005CDBE0 /* PocketLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A442F50DA06005CDBE0 /* PocketLibrary.xcdatamodeld */; };
 		BEF41A482F50DDEA005CDBE0 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A472F50DDEA005CDBE0 /* PersistenceController.swift */; };
+		BEF41A4A2F52329F005CDBE0 /* ReadingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A492F52329F005CDBE0 /* ReadingListViewModel.swift */; };
+		BEF41A4C2F523324005CDBE0 /* ReadingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41A4B2F523324005CDBE0 /* ReadingListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		BEF41A422F50D634005CDBE0 /* CoreDataBookStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBookStore.swift; sourceTree = "<group>"; };
 		BEF41A452F50DA06005CDBE0 /* PocketLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PocketLibrary.xcdatamodel; sourceTree = "<group>"; };
 		BEF41A472F50DDEA005CDBE0 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		BEF41A492F52329F005CDBE0 /* ReadingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListViewModel.swift; sourceTree = "<group>"; };
+		BEF41A4B2F523324005CDBE0 /* ReadingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,8 @@
 				BEF41A422F50D634005CDBE0 /* CoreDataBookStore.swift */,
 				BEF41A442F50DA06005CDBE0 /* PocketLibrary.xcdatamodeld */,
 				BEF41A472F50DDEA005CDBE0 /* PersistenceController.swift */,
+				BEF41A492F52329F005CDBE0 /* ReadingListViewModel.swift */,
+				BEF41A4B2F523324005CDBE0 /* ReadingListViewController.swift */,
 			);
 			path = 1;
 			sourceTree = "<group>";
@@ -252,9 +258,11 @@
 				BE7D4F1B2F47BCB400B0B958 /* BookView.swift in Sources */,
 				BE7BB3D32F4ABF5B00FE96E0 /* SearchView.swift in Sources */,
 				BEF41A3F2F50D2D5005CDBE0 /* DetailsContentView.swift in Sources */,
+				BEF41A4C2F523324005CDBE0 /* ReadingListViewController.swift in Sources */,
 				BEF41A482F50DDEA005CDBE0 /* PersistenceController.swift in Sources */,
 				BE9C3A932F4BFD9F00B645CF /* MockBooksService.swift in Sources */,
 				BE7D4F072F479D8200B0B958 /* AppDelegate.swift in Sources */,
+				BEF41A4A2F52329F005CDBE0 /* ReadingListViewModel.swift in Sources */,
 				BEF41A432F50D634005CDBE0 /* CoreDataBookStore.swift in Sources */,
 				BEF41A462F50DA06005CDBE0 /* PocketLibrary.xcdatamodeld in Sources */,
 				BE7BB3CF2F48CB5A00FE96E0 /* LibraryViewModel.swift in Sources */,

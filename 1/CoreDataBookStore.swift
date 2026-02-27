@@ -11,6 +11,7 @@ protocol BooksStore {
     func save(_ book: BookModel) async throws
     func remove(_ book: BookModel) async throws
     func isSaved(_ book: BookModel) async -> Bool
+    func fetchSavedBooks() async throws -> [BookModel]
 }
 
 final class CoreDataBooksStore: BooksStore {
@@ -49,6 +50,25 @@ final class CoreDataBooksStore: BooksStore {
             let request: NSFetchRequest<SavedBook> = SavedBook.fetchRequest()
             request.predicate = NSPredicate(format: "id == %@", book.id)
             return (try? self.context.count(for: request)) ?? 0 > 0
+        }
+    }
+    
+    func fetchSavedBooks() async throws -> [BookModel] {
+        try await context.perform {
+            let request: NSFetchRequest<SavedBook> = SavedBook.fetchRequest()
+            request.sortDescriptors = [
+                NSSortDescriptor(key: "dateSaved", ascending: false)
+            ]
+
+            let results = try self.context.fetch(request)
+
+            return results.map {
+                BookModel(
+                    id: $0.id!,
+                    title: $0.title != nil ? $0.title! : "title not set",
+                    author: $0.author != nil ? $0.author! : "author not set"
+                )
+            }
         }
     }
 }
