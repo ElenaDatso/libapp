@@ -10,6 +10,7 @@ import UIKit
 class LibraryViewController: UIViewController {
     
     private let vm: LibraryViewModel
+
     weak var coordinator: LibraryCoordinator?
 
     private lazy var searchField = SearchView(
@@ -32,6 +33,8 @@ class LibraryViewController: UIViewController {
         return vw
     }()
     
+    var activityIndicator = Spinner(style: .large)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -43,10 +46,8 @@ class LibraryViewController: UIViewController {
         )
         
         setup()
+
         vm.delegate = self
-        //Task {
-            //await vm.search(query: "pomoika")
-        //}
     }
     
     init(viewModel: LibraryViewModel) {
@@ -100,9 +101,21 @@ private extension LibraryViewController {
         self.view.backgroundColor = .white
         cv.accessibilityIdentifier = "booksCollectionView"
         searchField.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
 
         self.view.addSubview(searchField)
         self.view.addSubview(cv)
+        self.view.addSubview(activityIndicator)
+        
+        vm.onloadingChanged = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+        }
         
         NSLayoutConstraint.activate([
             
@@ -115,6 +128,11 @@ private extension LibraryViewController {
             cv.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             cv.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             cv.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            activityIndicator.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 20),
+            activityIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            activityIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
         ])
     }
 }

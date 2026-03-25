@@ -18,4 +18,11 @@ final class ReadingListViewModel {
     func load() async throws {
         books = try await store.fetchSavedBooks()
     }
+    
+    @MainActor
+    func delete(at index: Int) async throws {
+        let book = books[index]
+        try await store.remove(book)
+        books.remove(at: index)
+    }
 }

@@ -14,6 +14,7 @@ final class ReadingListViewController: UIViewController {
         let tv = UITableView()
         tv.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tv.dataSource = self
+        tv.delegate = self
         tv.translatesAutoresizingMaskIntoConstraints = false
         return tv
     }()
@@ -65,5 +66,20 @@ extension ReadingListViewController: UITableViewDataSource {
 
         cell.textLabel?.text = "\(book.title) — \(book.author)"
         return cell
+    }
+}
+
+extension ReadingListViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+
+        guard editingStyle == .delete else { return }
+
+        Task {
+            try await viewModel.delete(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }

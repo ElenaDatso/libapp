@@ -22,6 +22,7 @@ final class LibraryViewModel {
     private(set) var books: [BookModel] = []
 
     weak var delegate: LibraryViewModelDelegate?
+    var onloadingChanged: ((Bool) -> Void)?
 
     init(service: BooksSearchServiceProtocol) {
         self.booksService = service
@@ -30,12 +31,18 @@ final class LibraryViewModel {
     @MainActor
     func search(query: String) {
         Task {
+            self.books = []
+            delegate?.didFinish()
+            
+            onloadingChanged?(true)
             do {
                 let result = try await booksService.search(query: query)
                 self.books = result
                 delegate?.didFinish()
+                onloadingChanged?(false)
             } catch {
                 delegate?.didFail(error: error)
+                onloadingChanged?(false)
             }
         }
 
