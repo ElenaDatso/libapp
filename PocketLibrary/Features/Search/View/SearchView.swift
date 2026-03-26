@@ -48,9 +48,27 @@ final class SearchView: UIView {
         return btn
     }()
     
-    private lazy var stack: UIStackView = {
+    let errorMsg: UILabel = {
+        let msgBlock = UILabel()
+        msgBlock.text = "error msg"
+        msgBlock.translatesAutoresizingMaskIntoConstraints = false
+        msgBlock.isHidden = true
+        msgBlock.textColor = .systemRed
+        msgBlock.font = .systemFont(ofSize: 14)
+        msgBlock.numberOfLines = 0
+        return msgBlock
+    }()
+    
+    private lazy var stackHor: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [textField, searchButton])
         stack.axis = .horizontal
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    private lazy var stackVert: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [stackHor, errorMsg])
+        stack.axis = .vertical
         stack.spacing = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -73,14 +91,16 @@ private extension SearchView {
     
     func setup() {
         backgroundColor = .white
-        addSubview(stack)
+        addSubview(stackVert)
         textField.delegate = self
         
         NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
-            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            stackVert.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            stackVert.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
+            stackVert.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            stackVert.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            
+            errorMsg.leadingAnchor.constraint(equalTo: stackVert.leadingAnchor, constant: 16),
             
             searchButton.widthAnchor.constraint(equalToConstant: 100),
             textField.heightAnchor.constraint(equalToConstant: 44),
@@ -97,6 +117,9 @@ private extension SearchView {
     }
     
     @objc func textChanged() {
+        if !errorMsg.isHidden {
+            errorMsg.isHidden = true
+        }
         onTextChanged?(textField.text ?? "")
     }
     

@@ -15,7 +15,7 @@ class LibraryViewController: UIViewController {
 
     private lazy var searchField = SearchView(
         onTap: { [weak self] text in
-            guard let self, !text.isEmpty else { return }
+            guard let self else { return }
             self.vm.search(query: text)
         },
         onText: { _ in }
@@ -125,7 +125,7 @@ private extension LibraryViewController {
             searchField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            searchField.heightAnchor.constraint(equalToConstant: 80),
+            searchField.heightAnchor.constraint(equalToConstant: 90),
             
             cv.topAnchor.constraint(equalTo: searchField.bottomAnchor),
             cv.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -136,6 +136,8 @@ private extension LibraryViewController {
     }
     
     func render(_ state: ViewState) {
+        cv.backgroundView = nil
+        searchField.errorMsg.isHidden = true
         switch state {
         case .idle:
             cv.backgroundView = viewState
@@ -144,16 +146,29 @@ private extension LibraryViewController {
             activityIndicator.startAnimating()
             cv.backgroundView = activityIndicator
         case .results(_):
-            cv.backgroundView = nil
             activityIndicator.stopAnimating()
         case .empty:
             activityIndicator.stopAnimating()
             cv.backgroundView = viewState
             viewState.config(image: UIImage(systemName: "tray"), title: "Nothing found", subtitle: "Try anothe one")
-        case .error(let msg):
+        case .error(let error):
             activityIndicator.stopAnimating()
-            cv.backgroundView = viewState
-            viewState.config(image: UIImage(systemName: "circles.hexagonpath.fill"), title: "Error", subtitle: msg)
+            switch error {
+            case .validation(let msg):
+                searchField.errorMsg.isHidden = false
+                searchField.errorMsg.text = msg
+                break
+            case .network(let error):
+                cv.backgroundView = viewState
+                viewState.config(image: UIImage(systemName: "circles.hexagonpath.fill"), title: "Error", subtitle: "Network Error: \(error.hashValue)")
+            case .api(let error):
+                cv.backgroundView = viewState
+                viewState.config(image: UIImage(systemName: "circles.hexagonpath.fill"), title: "Error", subtitle: "Network Error: \(error.code)")
+            case .decoding(let error):
+                cv.backgroundView = viewState
+                viewState.config(image: UIImage(systemName: "circles.hexagonpath.fill"), title: "Error", subtitle: "Network Error: \(error.errorDescription)")
+            }
+
         }
     }
 }

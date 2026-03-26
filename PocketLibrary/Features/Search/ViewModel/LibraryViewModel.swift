@@ -8,7 +8,11 @@
 import Foundation
 
 enum ViewState {
-    case idle, loading, results([BookModel]), empty, error(String)
+    case idle, loading, results([BookModel]), empty, error(AppErrors)
+}
+
+enum AppErrors: Error {
+    case network(CFNetworkErrors), api(NSError), decoding(DecodingError), validation(String)
 }
 
 protocol LibraryViewModelDelegate: AnyObject {
@@ -43,7 +47,7 @@ final class LibraryViewModel {
     @MainActor
     func search(query: String) {
         guard !query.isEmpty else {
-            state = .error("The search field is empty")
+            state = .error(.validation("Empty search field"))
             return
         }
         currentTask?.cancel()
@@ -65,7 +69,7 @@ final class LibraryViewModel {
                 delegate?.didFinishReloadData()
             } catch {
                 delegate?.didFail(error: error)
-                state = .error("Error occured: \(error)")
+                state = .error(AppErrors.network(.cfErrorHTTPBadURL))
             }
         }
     }
