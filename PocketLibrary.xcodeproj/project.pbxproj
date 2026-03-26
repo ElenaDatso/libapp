@@ -18,6 +18,7 @@
 		BE7D4F102F479D8500B0B958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE7D4F0F2F479D8500B0B958 /* Assets.xcassets */; };
 		BE7D4F132F479D8500B0B958 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE7D4F112F479D8500B0B958 /* LaunchScreen.storyboard */; };
 		BE7D4F1B2F47BCB400B0B958 /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7D4F1A2F47BCB400B0B958 /* BookView.swift */; };
+		BE86F2D02F75993F00AF1507 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE86F2CF2F75993F00AF1507 /* StateView.swift */; };
 		BE9C3A822F4B668E00B645CF /* BooksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C3A812F4B668E00B645CF /* BooksService.swift */; };
 		BE9C3A932F4BFD9F00B645CF /* MockBooksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9C3A922F4BFD9F00B645CF /* MockBooksService.swift */; };
 		BED81D7B2F7343FD007A7CF1 /* PocketLibraryUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED81D7A2F7343FD007A7CF1 /* PocketLibraryUnitTests.swift */; };
@@ -56,6 +57,7 @@
 		BE7D4F122F479D8500B0B958 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE7D4F142F479D8500B0B958 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE7D4F1A2F47BCB400B0B958 /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
+		BE86F2CF2F75993F00AF1507 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 		BE9C3A812F4B668E00B645CF /* BooksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksService.swift; sourceTree = "<group>"; };
 		BE9C3A922F4BFD9F00B645CF /* MockBooksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockBooksService.swift; sourceTree = "<group>"; };
 		BED81D782F7343FD007A7CF1 /* PocketLibraryUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PocketLibraryUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 				BE7D4F0A2F479D8200B0B958 /* LibraryViewController.swift */,
 				BE7BB3D22F4ABF5B00FE96E0 /* SearchView.swift */,
 				BE7BB3D02F48E33000FE96E0 /* BookCollectionViewCell.swift */,
+				BE86F2CF2F75993F00AF1507 /* StateView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				BE9C3A932F4BFD9F00B645CF /* MockBooksService.swift in Sources */,
 				BE7D4F072F479D8200B0B958 /* AppDelegate.swift in Sources */,
 				BEF41A4A2F52329F005CDBE0 /* ReadingListViewModel.swift in Sources */,
+				BE86F2D02F75993F00AF1507 /* StateView.swift in Sources */,
 				BEF41A432F50D634005CDBE0 /* CoreDataBookStore.swift in Sources */,
 				BEF41A462F50DA06005CDBE0 /* PocketLibrary.xcdatamodeld in Sources */,
 				BE7BB3CF2F48CB5A00FE96E0 /* LibraryViewModel.swift in Sources */,

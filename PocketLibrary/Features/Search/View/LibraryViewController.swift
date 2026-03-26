@@ -34,6 +34,7 @@ class LibraryViewController: UIViewController {
     }()
     
     var activityIndicator = Spinner(style: .large)
+    var viewState = StateView(image: UIImage(systemName: "tray"), title: "Start searching", subtitle: "type some text")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,12 @@ class LibraryViewController: UIViewController {
 
         vm.delegate = self
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        viewState.frame = cv.bounds
+    }
+    
     
     init(viewModel: LibraryViewModel) {
         self.vm = viewModel
@@ -71,7 +78,7 @@ class LibraryViewController: UIViewController {
 }
 
 extension LibraryViewController: LibraryViewModelDelegate {
-    func didFinish() {
+    func didFinishReloadData() {
         cv.reloadData()
     }
     func didFail(error: Error) {
@@ -101,20 +108,16 @@ private extension LibraryViewController {
         self.view.backgroundColor = .white
         cv.accessibilityIdentifier = "booksCollectionView"
         searchField.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-
+        
+        cv.backgroundView = viewState
+        viewState.frame = cv.bounds
+        activityIndicator.frame = cv.bounds
+        
         self.view.addSubview(searchField)
         self.view.addSubview(cv)
-        self.view.addSubview(activityIndicator)
         
-        vm.onloadingChanged = { [weak self] isLoading in
-            DispatchQueue.main.async {
-                if isLoading {
-                    self?.activityIndicator.startAnimating()
-                } else {
-                    self?.activityIndicator.stopAnimating()
-                }
-            }
+        vm.onStateChange = {[weak self] state in
+            self?.render(state)
         }
         
         NSLayoutConstraint.activate([
@@ -129,10 +132,28 @@ private extension LibraryViewController {
             cv.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             cv.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            activityIndicator.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 20),
-            activityIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            activityIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
         ])
+    }
+    
+    func render(_ state: ViewState) {
+        switch state {
+        case .idle:
+            cv.backgroundView = viewState
+            viewState.config(image: UIImage(systemName: "tray"), title: "Start searching", subtitle: "type some text")
+        case .loading:
+            activityIndicator.startAnimating()
+            cv.backgroundView = activityIndicator
+        case .results(_):
+            cv.backgroundView = nil
+            activityIndicator.stopAnimating()
+        case .empty:
+            activityIndicator.stopAnimating()
+            cv.backgroundView = viewState
+            viewState.config(image: UIImage(systemName: "tray"), title: "Nothing found", subtitle: "Try anothe one")
+        case .error(let msg):
+            activityIndicator.stopAnimating()
+            cv.backgroundView = viewState
+            viewState.config(image: UIImage(systemName: "circles.hexagonpath.fill"), title: "Error", subtitle: msg)
+        }
     }
 }

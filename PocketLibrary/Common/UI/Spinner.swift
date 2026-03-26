@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class Spinner: UIActivityIndicatorView  {
-    
+        
     override init(style: UIActivityIndicatorView.Style) {
         
         super.init(style: style)
@@ -23,8 +23,6 @@ final class Spinner: UIActivityIndicatorView  {
 
 private extension Spinner {
     func setup() {
-        self.translatesAutoresizingMaskIntoConstraints = false
+        self.hidesWhenStopped = true
     }
 }
-
-

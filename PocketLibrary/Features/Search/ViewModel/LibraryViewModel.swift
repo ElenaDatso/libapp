@@ -7,8 +7,12 @@
 
 import Foundation
 
+enum ViewState {
+    case idle, loading, results([BookModel]), empty, error(String)
+}
+
 protocol LibraryViewModelDelegate: AnyObject {
-    func didFinish()
+    func didFinishReloadData()
     func didFail(error: Error)
 }
 
@@ -20,9 +24,15 @@ final class LibraryViewModel {
 
     private let booksService: BooksSearchServiceProtocol
     private(set) var books: [BookModel] = []
+    private(set) var state: ViewState = .idle {
+        didSet {
+            onStateChange?(state)
+        }
+    }
+    var onStateChange: ((ViewState) -> Void)?
 
     weak var delegate: LibraryViewModelDelegate?
-    var onloadingChanged: ((Bool) -> Void)?
+    var viewState: ((ViewState) -> Void)?
 
     init(service: BooksSearchServiceProtocol) {
         self.booksService = service
@@ -30,21 +40,29 @@ final class LibraryViewModel {
 
     @MainActor
     func search(query: String) {
+        guard !query.isEmpty else {
+            state = .error("The search field is empty")
+            return
+        }
+        state = .loading
         Task {
-            self.books = []
-            delegate?.didFinish()
+            print("start task. state: \(state)")
+            books = []
+            delegate?.didFinishReloadData()
             
-            onloadingChanged?(true)
             do {
                 let result = try await booksService.search(query: query)
                 self.books = result
-                delegate?.didFinish()
-                onloadingChanged?(false)
+                if books.isEmpty {
+                    state = .empty
+                } else {
+                    state = .results(books)
+                }
+                delegate?.didFinishReloadData()
             } catch {
                 delegate?.didFail(error: error)
-                onloadingChanged?(false)
+                state = .error("Error occured: \(error)")
             }
         }
-
     }
 }
