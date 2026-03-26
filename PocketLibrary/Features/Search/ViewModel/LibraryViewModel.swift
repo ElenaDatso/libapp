@@ -29,6 +29,8 @@ final class LibraryViewModel {
             onStateChange?(state)
         }
     }
+    private var currentTask: Task<Void, Never>?
+    
     var onStateChange: ((ViewState) -> Void)?
 
     weak var delegate: LibraryViewModelDelegate?
@@ -44,8 +46,10 @@ final class LibraryViewModel {
             state = .error("The search field is empty")
             return
         }
+        currentTask?.cancel()
         state = .loading
-        Task {
+        
+        currentTask = Task {
             print("start task. state: \(state)")
             books = []
             delegate?.didFinishReloadData()
